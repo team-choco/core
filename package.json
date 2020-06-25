@@ -1,0 +1,31 @@
+{
+  "name": "@team-choco/core",
+  "private": true,
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "postinstall": "lerna bootstrap --force-local",
+    "start": "lerna run start --parallel --stream",
+    "build": "lerna run build --include-dependencies --no-private",
+    "build:watch": "lerna run --parallel build:watch --include-dependencies --no-private"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/team-choco/core.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/team-choco/core/issues"
+  },
+  "homepage": "https://github.com/team-choco/core#readme",
+  "devDependencies": {
+    "@types/app-root-path": "^1.2.4",
+    "@types/node": "^14.0.14",
+    "app-root-path": "^3.0.0",
+    "concurrently": "^5.2.0",
+    "dotenv": "^8.2.0",
+    "lerna": "^3.22.1",
+    "microbundle": "^0.12.2"
+  }
+}

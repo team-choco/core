@@ -1,0 +1,22 @@
+{
+  "name": "@team-choco/examples",
+  "private": true,
+  "version": "0.1.0",
+  "description": "",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@team-choco/core": "^0.0.0",
+    "@team-choco/command": "^0.0.0"
+  },
+  "scripts": {
+    "start": "nodemon --exec ts-node .",
+    "build": "microbundle --target node -f es,cjs"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.4",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.5"
+  }
+}

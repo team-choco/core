@@ -1,0 +1,22 @@
+{
+  "name": "@team-choco/core",
+  "version": "0.0.0",
+  "description": "",
+  "source": "src/index.ts",
+  "main": "dist/core.js",
+  "module": "dist/core.module.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start": "npm run build:watch",
+    "build": "microbundle --target node -f es,cjs",
+    "build:watch": "microbundle watch --target node -f es,cjs"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^14.0.14"
+  },
+  "dependencies": {
+    "discord.js": "^12.2.0"
+  }
+}

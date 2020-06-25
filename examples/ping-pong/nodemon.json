@@ -1,0 +1,15 @@
+{
+  "watch": [
+    "src",
+    ".env",
+    "node_modules/@team-choco/*/dist/"
+  ],
+  "ext": "ts,js",
+  "ignoreRoot": [
+    ".git"
+  ],
+  "ignore": [
+    "**/__test__/*.spec.js",
+    "**/__integration__/*.spec.js"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+    "name": "@team-choco/command",
+    "version": "0.0.0",
+    "description": "",
+    "source": "src/index.ts",
+    "main": "dist/command.js",
+    "module": "dist/command.module.js",
+    "types": "dist/index.d.ts",
+    "dependencies": {
+      "@team-choco/core": "^0.0.0"
+    },
+    "scripts": {
+      "start": "npm run build:watch",
+      "build": "microbundle --target node -f es,cjs",
+      "build:watch": "microbundle watch --target node -f es,cjs"
+    },
+    "author": "",
+    "license": "ISC"
+  }
