@@ -1,23 +1,39 @@
-export function toArgs(message: string, names: string[]): ChocoArgs {
-  return message.split(' ').reduce((output: ChocoArgs, value, i, list) => {
-    if (value !== '') {
-      if (value.startsWith('-')) {
-        const key = value.replace(/^\-\-?/, '');
+import { PositionalArgumentDetails } from './pattern';
 
-        output[key] = list[i + 1] || true;
+export function toChocoArgs(message: string, args: PositionalArgumentDetails[]): ChocoArgs {
+  const clonedArgs = [...args];
+  const values = message.split(' ').filter((value) => value !== '');
+
+  const output: ChocoArgs = {
+    _: [],
+  };
+
+  for (let i = 0; i < values.length; i++) {
+    const value = values[i];
+
+    if (value.startsWith('-')) {
+      const key = value.replace(/^\-\-?/, '');
+
+      if (values[i + 1]) {
+        output[key] = values[i + 1];
+        i++;
       } else {
-        const name = names.shift();
+        output[key] = true;
+      }
+    } else {
+      const details = clonedArgs.shift();
 
-        if (name) {
-          output[name] = value;
-        } else {
-          output._.push(value);
-        }
+      if (!details) {
+        output._.push(value);
+      } else if (details.rest) {
+        output[details.name] = values.splice(i).join(' ');
+      } else {
+        output[details.name] = value;
       }
     }
+  }
 
-    return output;
-  }, { _: [] });
+  return output;
 }
 
 export interface ChocoArgs {

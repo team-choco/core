@@ -13,8 +13,12 @@ const bot = new ChocoBotCore({
   ],
 });
 
-bot.command('pong', async ({ message }: ChocoCommandListenerDetails) => {
-  await message.channel.send('ping!');
+bot.command('hello', async ({ message }: ChocoCommandListenerDetails) => {
+  await message.channel.send(`It's nice to meet you ${message.author.username}`);
+});
+
+bot.command('welcome <...name>', async ({ message, args }: ChocoCommandListenerDetails) => {
+  await message.channel.send(`Welcome to the server ${args.name}!`);
 });
 
 bot.command('ping', async ({ message }: ChocoCommandListenerDetails) => {

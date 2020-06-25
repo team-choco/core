@@ -1,5 +1,5 @@
-import { toPattern, ChocoPattern } from './pattern';
-import { toArgs, ChocoArgs } from './args';
+import { toChocoPattern, ChocoPattern } from './pattern';
+import { toChocoArgs, ChocoArgs } from './args';
 import { Message } from '@team-choco/core';
 
 export class ChocoCommand {
@@ -7,22 +7,22 @@ export class ChocoCommand {
 
   constructor(options: ChocoRawCommandOptions) {
     this.options = {
-      pattern: toPattern(options.pattern),
+      pattern: toChocoPattern(options.pattern),
       listener: options.listener,
     };
   }
 
   parse(message: string): (null|ChocoArgs) {
-    const match = message.match(this.options.pattern.regex);
+    const match = message.match(this.options.pattern.fullRegex);
 
     if (match) {
-      return toArgs(message, this.options.pattern.names);
+      return toChocoArgs(message.replace(this.options.pattern.commandOnlyRegex, ''), this.options.pattern.args);
     }
 
     return null;
   }
 
-  async exec(options: ChocoCommandListenerDetails) {
+  async exec(options: ChocoCommandListenerDetails): Promise<void> {
     await this.options.listener(options);
   }
 }
@@ -30,7 +30,7 @@ export class ChocoCommand {
 export interface ChocoRawCommandOptions {
   pattern: string;
   listener: ChocoCommandListener;
-};
+}
 
 export interface ChocoCommandOptions {
   pattern: ChocoPattern;

@@ -1,22 +1,23 @@
 {
-  "name": "@team-choco/core",
+  "name": "@team-choco/test-helpers",
+  "private": true,
   "version": "0.0.0",
-  "description": "",
+  "description": "A collection of test-helpers for Team Choco!",
   "source": "src/index.ts",
-  "main": "dist/core.js",
-  "module": "dist/core.module.js",
+  "main": "dist/test-helpers.js",
+  "module": "dist/test-helpers.module.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "start": "npm run build:watch",
     "build": "microbundle --target node -f es,cjs",
     "build:watch": "microbundle watch --target node -f es,cjs"
   },
-  "author": "",
   "license": "MIT",
   "dependencies": {
+    "chance": "^1.1.6",
     "discord.js": "^12.2.0"
   },
   "devDependencies": {
-    "@team-choco/test-helpers": "^0.0.0"
+    "sinon": "^9.0.2"
   }
 }

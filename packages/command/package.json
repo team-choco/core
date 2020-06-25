@@ -1,5 +1,5 @@
 {
-    "name": "@team-choco/command",
+    "name": "@team-choco/command-plugin",
     "version": "0.0.0",
     "description": "",
     "source": "src/index.ts",
@@ -9,11 +9,14 @@
     "dependencies": {
       "@team-choco/core": "^0.0.0"
     },
+    "devDependencies": {
+      "@team-choco/test-helpers": "^0.0.0"
+    },
     "scripts": {
       "start": "npm run build:watch",
       "build": "microbundle --target node -f es,cjs",
       "build:watch": "microbundle watch --target node -f es,cjs"
     },
     "author": "",
-    "license": "ISC"
+    "license": "MIT"
   }

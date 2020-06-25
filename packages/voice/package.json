@@ -15,5 +15,5 @@
     "build:watch": "microbundle watch --target node -f es,cjs"
   },
   "author": "",
-  "license": "ISC"
+  "license": "MIT"
 }

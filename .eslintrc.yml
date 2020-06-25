@@ -39,6 +39,8 @@ rules:
       functions: always-multiline
 overrides:
   - files:
-    - '**/test/*.spec.ts'
+    - '**/__test__/*.spec.ts'
+    plugins:
+    - jest
     env:
-      mocha: true
+      jest/globals: true

@@ -1,24 +1,25 @@
-import { Plugin, Bot, Message } from '@team-choco/core';
+import { ChocoPlugin, ChocoBotCore, Message } from '@team-choco/core';
 import { ChocoCommand, ChocoCommandListener } from './command';
+import { ChocoArgs } from './command/args';
 
 declare module '@team-choco/core' {
-  interface Bot {
+  interface ChocoBotCore {
     command: (pattern: string, listener: ChocoCommandListener) => ChocoCommand;
   }
 }
 
-export class CommandPlugin implements Plugin {
-  private options: CommandPluginOptions;
-  private commands: ChocoCommand[] = [];
+export class ChocoCommandPlugin implements ChocoPlugin {
+  private options: ChocoCommandPluginOptions;
+  public commands: ChocoCommand[] = [];
 
-  constructor(options: CommandPluginOptions) {
+  constructor(options: ChocoCommandPluginOptions) {
     this.options = options;
 
     this.command = this.command.bind(this);
     this.onMessage = this.onMessage.bind(this);
   }
 
-  register(bot: Bot): void {
+  register(bot: ChocoBotCore): void {
     bot.command = this.command;
 
     bot.on('message', this.onMessage);
@@ -41,17 +42,17 @@ export class CommandPlugin implements Plugin {
 
     const command = this.commands.find((command) => command.parse(message.content));
 
+    // Bail early if we couldn't find a matching command
     if (!command) return;
 
-    const args = command.parse(message.content);
-
-    if (!args) return;
-
-    command.exec({ message, args });
+    command.exec({
+      message,
+      args: command.parse(message.content) as ChocoArgs,
+    });
   }
 }
 
-export interface CommandPluginOptions {
+export interface ChocoCommandPluginOptions {
   /**
    * The command prefix.
    */

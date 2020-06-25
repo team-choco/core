@@ -1,3 +1,3 @@
 export type { Message } from 'discord.js';
-export { Bot } from './core';
-export type { Plugin } from './core';
+export { ChocoBotCore } from './core';
+export type { ChocoPlugin } from './core';
