@@ -1,7 +1,7 @@
 {
   "name": "@team-choco/core",
   "version": "0.0.0",
-  "description": "",
+  "description": "The foundation of all things Choco Bot!",
   "source": "src/index.ts",
   "main": "dist/core.js",
   "module": "dist/core.module.js",
@@ -15,6 +15,9 @@
   "license": "MIT",
   "dependencies": {
     "discord.js": "^12.2.0"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "devDependencies": {
     "@team-choco/test-helpers": "^0.0.0"

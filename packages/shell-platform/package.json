@@ -1,7 +1,7 @@
 {
     "name": "@team-choco/shell-platform",
     "version": "0.0.0",
-    "description": "",
+    "description": "Connect your bot to your local Shell!",
     "source": "src/index.ts",
     "main": "dist/shell-platform.js",
     "module": "dist/shell-platform.module.js",

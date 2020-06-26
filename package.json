@@ -1,15 +1,14 @@
 {
   "name": "@team-choco/core",
-  "private": true,
   "version": "0.0.0",
-  "description": "",
   "scripts": {
     "postinstall": "lerna bootstrap --force-local",
     "start": "lerna run start --parallel --stream",
     "build": "lerna run build --parallel --include-dependencies --ignore @team-choco/examples-*",
     "build:prod": "lerna run build --parallel --ignore @team-choco/examples-* --ignore @team-choco/*-helpers",
     "build:watch": "lerna run --parallel build:watch --include-dependencies --no-private",
-    "release": "lerna publish --no-private",
+    "version": "lerna version --no-private",
+    "release": "lerna publish from-git --no-private",
     "lint": "eslint . --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint",
     "test": "jest",
     "test:coverage": "jest --coverage"
@@ -39,5 +38,8 @@
     "lerna": "^3.22.1",
     "microbundle": "^0.12.2",
     "ts-jest": "^26.1.1"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

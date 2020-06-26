@@ -1,7 +1,7 @@
 {
     "name": "@team-choco/command-plugin",
     "version": "0.0.0",
-    "description": "",
+    "description": "Adds the ability to register commands to Choco Bot Core!",
     "source": "src/index.ts",
     "main": "dist/command.js",
     "module": "dist/command.module.js",

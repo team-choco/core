@@ -1,7 +1,7 @@
 {
   "name": "@team-choco/discord-platform",
   "version": "0.0.0",
-  "description": "",
+  "description": "Connect your bot to Discord!",
   "source": "src/index.ts",
   "main": "dist/shell-platform.js",
   "module": "dist/shell-platform.module.js",
