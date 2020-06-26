@@ -57,7 +57,7 @@ const bot = new ChocoBotCore({
 // Example Interaction
 // <me>: !ping
 // <Choco Bot>: pong!
-bot.command('ping', async ({ message }) => {
+bot.command('ping', async ({ message, args }) => {
   console.log(args); // { _: [] }
   await message.reply('pong!');
 });
