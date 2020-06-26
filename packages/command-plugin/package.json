@@ -2,6 +2,17 @@
   "name": "@team-choco/command-plugin",
   "version": "0.1.0",
   "description": "Adds the ability to register commands to Choco Bot Core!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/team-choco/core.git"
+  },
+  "contributors": [
+    "Nick Woodward <nick@salte.io>"
+  ],
+  "bugs": {
+    "url": "https://github.com/team-choco/core/issues"
+  },
+  "homepage": "https://github.com/team-choco/core/tree/master/packages/command-plugin#readme",
   "source": "src/index.ts",
   "main": "dist/command.js",
   "module": "dist/command.module.js",

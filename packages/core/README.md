@@ -12,4 +12,4 @@ $ npm install -S @team-choco/core
 
 ## Usage
 
-See [here](../../README.md) for a full example!
+See [here](https://github.com/team-choco/core/README.md) for a full example!

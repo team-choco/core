@@ -2,6 +2,17 @@
   "name": "@team-choco/core",
   "version": "0.1.0",
   "description": "The foundation of all things Choco Bot!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/team-choco/core.git"
+  },
+  "contributors": [
+    "Nick Woodward <nick@salte.io>"
+  ],
+  "bugs": {
+    "url": "https://github.com/team-choco/core/issues"
+  },
+  "homepage": "https://github.com/team-choco/core#readme",
   "source": "src/index.ts",
   "main": "dist/core.js",
   "module": "dist/core.module.js",

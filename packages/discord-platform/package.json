@@ -2,6 +2,17 @@
   "name": "@team-choco/discord-platform",
   "version": "0.1.0",
   "description": "Connect your bot to Discord!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/team-choco/core.git"
+  },
+  "contributors": [
+    "Nick Woodward <nick@salte.io>"
+  ],
+  "bugs": {
+    "url": "https://github.com/team-choco/core/issues"
+  },
+  "homepage": "https://github.com/team-choco/core/tree/master/packages/discord-platform#readme",
   "source": "src/index.ts",
   "main": "dist/shell-platform.js",
   "module": "dist/shell-platform.module.js",
