@@ -18,6 +18,7 @@
     "build": "microbundle --target node -f es,cjs",
     "build:watch": "microbundle watch --target node -f es,cjs"
   },
-  "author": "",
-  "license": "MIT"
+  "publishConfig": {
+    "access": "public"
+  }
 }

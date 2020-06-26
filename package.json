@@ -17,8 +17,9 @@
     "type": "git",
     "url": "git+https://github.com/team-choco/core.git"
   },
-  "author": "",
-  "license": "MIT",
+  "contributors": [
+    "Nick Woodward <nick@salte.io>"
+  ],
   "bugs": {
     "url": "https://github.com/team-choco/core/issues"
   },

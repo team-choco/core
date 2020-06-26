@@ -6,20 +6,18 @@
   "main": "dist/core.js",
   "module": "dist/core.module.js",
   "types": "dist/index.d.ts",
+  "dependencies": {
+    "discord.js": "^12.2.0"
+  },
+  "devDependencies": {
+    "@team-choco/test-helpers": "^0.0.0"
+  },
   "scripts": {
     "start": "npm run build:watch",
     "build": "microbundle --target node -f es,cjs",
     "build:watch": "microbundle watch --target node -f es,cjs"
   },
-  "author": "",
-  "license": "MIT",
-  "dependencies": {
-    "discord.js": "^12.2.0"
-  },
   "publishConfig": {
     "access": "public"
-  },
-  "devDependencies": {
-    "@team-choco/test-helpers": "^0.0.0"
   }
 }
