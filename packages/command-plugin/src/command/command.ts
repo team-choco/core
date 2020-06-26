@@ -1,6 +1,6 @@
 import { toChocoPattern, ChocoPattern } from './pattern';
 import { toChocoArgs, ChocoArgs } from './args';
-import { Message } from '@team-choco/core';
+import { ChocoMessage } from '@team-choco/core';
 
 export class ChocoCommand {
   private options: ChocoCommandOptions;
@@ -40,6 +40,6 @@ export interface ChocoCommandOptions {
 export type ChocoCommandListener = (details: ChocoCommandListenerDetails) => void;
 
 export interface ChocoCommandListenerDetails {
-  message: Message;
+  message: ChocoMessage;
   args: ChocoArgs;
 }

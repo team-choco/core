@@ -1,0 +1,24 @@
+{
+  "name": "@team-choco/example-helpers",
+  "private": true,
+  "version": "0.0.0",
+  "description": "A collection of example-helpers for Team Choco!",
+  "source": "src/index.ts",
+  "main": "dist/example-helpers.js",
+  "module": "dist/example-helpers.module.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start": "npm run build:watch",
+    "build": "microbundle --target node -f es,cjs",
+    "build:watch": "microbundle watch --target node -f es,cjs"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@team-choco/core": "^0.0.0",
+    "@team-choco/discord-platform": "^0.0.0",
+    "@team-choco/shell-platform": "^0.0.0",
+    "@types/app-root-path": "^1.2.4",
+    "app-root-path": "^3.0.0",
+    "dotenv": "^8.2.0"
+  }
+}

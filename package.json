@@ -6,8 +6,10 @@
   "scripts": {
     "postinstall": "lerna bootstrap --force-local",
     "start": "lerna run start --parallel --stream",
-    "build": "lerna run build --include-dependencies --ignore @team-choco/examples-*",
+    "build": "lerna run build --parallel --include-dependencies --ignore @team-choco/examples-*",
+    "build:prod": "lerna run build --parallel --ignore @team-choco/examples-* --ignore @team-choco/*-helpers",
     "build:watch": "lerna run --parallel build:watch --include-dependencies --no-private",
+    "release": "lerna publish --no-private",
     "lint": "eslint . --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint",
     "test": "jest",
     "test:coverage": "jest --coverage"
@@ -23,16 +25,13 @@
   },
   "homepage": "https://github.com/team-choco/core#readme",
   "devDependencies": {
-    "@types/app-root-path": "^1.2.4",
     "@types/chance": "^1.1.0",
     "@types/jest": "^26.0.3",
     "@types/node": "^12.0.0",
     "@types/sinon": "^9.0.4",
     "@typescript-eslint/eslint-plugin": "^3.4.0",
     "@typescript-eslint/parser": "^3.4.0",
-    "app-root-path": "^3.0.0",
     "concurrently": "^5.2.0",
-    "dotenv": "^8.2.0",
     "eslint": "^7.3.1",
     "eslint-plugin-jest": "^23.17.1",
     "eslint-plugin-tsdoc": "^0.2.5",

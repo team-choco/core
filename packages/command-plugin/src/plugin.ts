@@ -1,4 +1,4 @@
-import { ChocoPlugin, ChocoBotCore, Message } from '@team-choco/core';
+import { ChocoPlugin, ChocoBotCore, ChocoMessage } from '@team-choco/core';
 import { ChocoCommand, ChocoCommandListener } from './command';
 import { ChocoArgs } from './command/args';
 
@@ -36,7 +36,7 @@ export class ChocoCommandPlugin implements ChocoPlugin {
     return command;
   }
 
-  private onMessage(message: Message): void {
+  private onMessage(message: ChocoMessage): void {
     // Bail early if our prefix doesn't match.
     if (!message.content.startsWith(this.options.prefix)) return;
 

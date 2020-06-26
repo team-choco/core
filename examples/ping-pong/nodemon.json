@@ -4,6 +4,7 @@
     ".env",
     "node_modules/@team-choco/*/dist/"
   ],
+  "delay": "2500",
   "ext": "ts,js",
   "ignoreRoot": [
     ".git"

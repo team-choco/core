@@ -1,10 +1,9 @@
 import { ChocoBotCore } from '@team-choco/core';
-import { ChocoCommandPlugin, ChocoCommandListenerDetails } from '@team-choco/command-plugin';
-
-import { CONFIG } from '../../shared/config';
+import { PLATFORM } from '@team-choco/example-helpers';
+import { ChocoCommandPlugin } from '@team-choco/command-plugin';
 
 const bot = new ChocoBotCore({
-  token: CONFIG.DISCORD_TOKEN,
+  platform: PLATFORM,
 
   plugins: [
     new ChocoCommandPlugin({
@@ -13,12 +12,12 @@ const bot = new ChocoBotCore({
   ],
 });
 
-bot.command('pong', async ({ message }: ChocoCommandListenerDetails) => {
-  await message.channel.send('ping!');
+bot.command('pong', async ({ message }) => {
+  await message.reply('ping!');
 });
 
-bot.command('ping', async ({ message }: ChocoCommandListenerDetails) => {
-  await message.channel.send('pong!');
+bot.command('ping', async ({ message }) => {
+  await message.reply('pong!');
 });
 
 process.on('SIGINT', () => {

@@ -1,10 +1,9 @@
 import { ChocoBotCore } from '@team-choco/core';
-import { ChocoCommandPlugin, ChocoCommandListenerDetails } from '@team-choco/command-plugin';
-
-import { CONFIG } from '../../shared/config';
+import { PLATFORM } from '@team-choco/example-helpers';
+import { ChocoCommandPlugin } from '@team-choco/command-plugin';
 
 const bot = new ChocoBotCore({
-  token: CONFIG.DISCORD_TOKEN,
+  platform: PLATFORM,
 
   plugins: [
     new ChocoCommandPlugin({
@@ -13,20 +12,16 @@ const bot = new ChocoBotCore({
   ],
 });
 
-bot.command('hello', async ({ message }: ChocoCommandListenerDetails) => {
-  await message.channel.send(`It's nice to meet you ${message.author.username}`);
+bot.command('hello', async ({ message }) => {
+  await message.reply(`It's nice to meet you ${message.author.username}`);
 });
 
-bot.command('welcome <...name>', async ({ message, args }: ChocoCommandListenerDetails) => {
-  await message.channel.send(`Welcome to the server ${args.name}!`);
+bot.command('welcome <...name>', async ({ message, args }) => {
+  await message.reply(`Welcome to the server ${args.name}!`);
 });
 
-bot.command('ping', async ({ message }: ChocoCommandListenerDetails) => {
-  await message.channel.send('pong!');
-});
-
-process.on('SIGINT', () => {
-  bot.destroy();
+process.on('SIGINT', async () => {
+  await bot.destroy();
   process.exit(0);
 });
 

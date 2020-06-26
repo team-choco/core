@@ -1,31 +1,31 @@
 import { EventEmitter } from 'events';
-import { Client, Message } from 'discord.js';
+import { ChocoPlatform, ChocoMessage } from './platform';
 
 export class ChocoBotCore extends EventEmitter {
-  private client: Client;
-  private options: ChocoBotOptions;
+  private platform: ChocoPlatform;
 
   public constructor(options: ChocoBotOptions) {
     super();
 
-    this.options = options;
-    this.client = new Client();
+    this.platform = options.platform;
 
-    if (this.options.plugins) {
-      this.register(...this.options.plugins);
+    if (options.plugins) {
+      this.register(...options.plugins);
     }
 
-    this.client.on('message', (message) =>
+    this.platform.on('message', (message) =>
       this.emit('message', message),
     );
 
-    this.client.on('ready', () => this.emit('ready'));
+    this.platform.on('ready', () =>
+      this.emit('ready'),
+    );
 
     this.login();
   }
 
   public async login(): Promise<void> {
-    await this.client.login(this.options.token);
+    await this.platform.login();
   }
 
   register(...plugins: ChocoPlugin[]): void {
@@ -33,16 +33,16 @@ export class ChocoBotCore extends EventEmitter {
   }
 
   destroy(): void {
-    this.client.destroy();
+    this.platform.destroy();
   }
 }
 
 export interface ChocoBotCore {
   on(event: 'ready', listener: () => void): this;
-  on(event: 'message', listener: (message: Message) => void): this;
+  on(event: 'message', listener: (message: ChocoMessage) => void): this;
 
   once(event: 'ready', listener: () => void): this;
-  once(event: 'message', listener: (message: Message) => void): this;
+  once(event: 'message', listener: (message: ChocoMessage) => void): this;
 }
 
 export interface ChocoPlugin {
@@ -51,9 +51,9 @@ export interface ChocoPlugin {
 
 export interface ChocoBotOptions {
   /**
-   * The Discore Bot Token.
+   * The Platform Interface.
    */
-  token: string;
+  platform: ChocoPlatform;
 
   /**
    * The plugins to register.

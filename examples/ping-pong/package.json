@@ -2,14 +2,15 @@
   "name": "@team-choco/examples-ping-pong",
   "private": true,
   "version": "0.1.0",
-  "description": "",
+  "description": "The ping to your pong!",
   "main": "src/index.ts",
   "dependencies": {
     "@team-choco/core": "^0.0.0",
-    "@team-choco/command-plugin": "^0.0.0"
+    "@team-choco/command-plugin": "^0.0.0",
+    "@team-choco/example-helpers": "^0.0.0"
   },
   "scripts": {
-    "start": "nodemon --exec ts-node .",
+    "start": "ts-node .",
     "build": "microbundle --target node -f es,cjs"
   },
   "author": "",
