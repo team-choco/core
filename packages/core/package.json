@@ -1,6 +1,6 @@
 {
   "name": "@team-choco/core",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "The foundation of all things Choco Bot!",
   "source": "src/index.ts",
   "main": "dist/core.js",

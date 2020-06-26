@@ -1,22 +1,22 @@
 {
-    "name": "@team-choco/command-plugin",
-    "version": "0.0.0",
-    "description": "Adds the ability to register commands to Choco Bot Core!",
-    "source": "src/index.ts",
-    "main": "dist/command.js",
-    "module": "dist/command.module.js",
-    "types": "dist/index.d.ts",
-    "dependencies": {
-      "@team-choco/core": "^0.0.0"
-    },
-    "devDependencies": {
-      "@team-choco/test-helpers": "^0.0.0"
-    },
-    "scripts": {
-      "start": "npm run build:watch",
-      "build": "microbundle --target node -f es,cjs",
-      "build:watch": "microbundle watch --target node -f es,cjs"
-    },
-    "author": "",
-    "license": "MIT"
-  }
+  "name": "@team-choco/command-plugin",
+  "version": "0.1.0",
+  "description": "Adds the ability to register commands to Choco Bot Core!",
+  "source": "src/index.ts",
+  "main": "dist/command.js",
+  "module": "dist/command.module.js",
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "@team-choco/core": "^0.1.0"
+  },
+  "devDependencies": {
+    "@team-choco/test-helpers": "^0.0.0"
+  },
+  "scripts": {
+    "start": "npm run build:watch",
+    "build": "microbundle --target node -f es,cjs",
+    "build:watch": "microbundle watch --target node -f es,cjs"
+  },
+  "author": "",
+  "license": "MIT"
+}
