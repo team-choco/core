@@ -35,12 +35,29 @@
     "eslint": "^7.3.1",
     "eslint-plugin-jest": "^23.17.1",
     "eslint-plugin-tsdoc": "^0.2.5",
+    "husky": "^4.2.5",
     "jest": "^26.1.0",
     "lerna": "^3.22.1",
+    "lint-staged": "^10.2.11",
     "microbundle": "^0.12.2",
+    "remove-lockfiles": "^2.1.3",
     "ts-jest": "^26.1.1"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && remove-lockfiles"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run lint:fix",
+      "git add --force"
+    ],
+    "*.json": [
+      "git add --force"
+    ]
   }
 }
