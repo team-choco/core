@@ -1,5 +1,8 @@
 **NOTE: THIS LIBRARY IS CURRENTLY UNDER HEAVY DEVELOPMENT, USE AT YOUR OWN RISK**
 
+[![NPM Version][npm-version-image]][npm-url]
+[![NPM Downloads][npm-downloads-image]][npm-url]
+
 ## @team-choco/command-plugin
 
 > Adds the ability to register commands to Choco Bot Core!
@@ -80,3 +83,7 @@ bot.command('search <...name>', async ({ message, args }) => {
   await message.reply(`You searched for "${args.name}"!`);
 });
 ```
+
+[npm-version-image]: https://img.shields.io/npm/v/@team-choco/command-plugin.svg?style=flat
+[npm-downloads-image]: https://img.shields.io/npm/dm/@team-choco/command-plugin.svg?style=flat
+[npm-url]: https://npmjs.org/package/@team-choco/command-plugin
