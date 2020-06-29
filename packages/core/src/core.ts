@@ -2,7 +2,7 @@ import { EventEmitter } from 'events';
 import { ChocoPlatform, ChocoMessage } from './platform';
 
 export class ChocoBotCore extends EventEmitter {
-  private platform: ChocoPlatform;
+  public platform: ChocoPlatform;
 
   public constructor(options: ChocoBotOptions) {
     super();

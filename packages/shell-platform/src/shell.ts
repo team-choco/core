@@ -1,6 +1,6 @@
 import readline from 'readline';
 
-import { ChocoPlatform, ChocoMessage, ChocoUser, ChocoMessageOptions } from '@team-choco/core';
+import { ChocoPlatform, ChocoMessage, ChocoUser, ChocoMessageOptions, ChocoStatus } from '@team-choco/core';
 import { convertChocoMessageOptionsToContent } from './utils/converter';
 
 export class ChocoShellPlatform extends ChocoPlatform {
@@ -42,7 +42,7 @@ export class ChocoShellPlatform extends ChocoPlatform {
 
     const content = convertChocoMessageOptionsToContent(options);
 
-    await this.write(this.options.name, content);
+    this.write(this.options.name, content);
 
     return {
       author: {
@@ -52,6 +52,11 @@ export class ChocoShellPlatform extends ChocoPlatform {
       content: content,
       reply: this.send.bind(this, channelID),
     };
+  }
+
+  async status(status: ChocoStatus, activity: string): Promise<void> {
+    this.write('SYSTEM', `Status updated to "${status}".`);
+    this.write('SYSTEM', `Activity updated to "${activity}".`);
   }
 
   async destroy(): Promise<void> {
@@ -70,7 +75,7 @@ export class ChocoShellPlatform extends ChocoPlatform {
     // Handle it!
     if (!who) {
       await this.clear(-1);
-      await this.write(this.options.whoami, content);
+      this.write(this.options.whoami, content);
     }
 
     this.emit('message', {
@@ -89,7 +94,7 @@ export class ChocoShellPlatform extends ChocoPlatform {
     await new Promise((resolve) => readline.clearLine(process.stdout, 0, resolve));
   }
 
-  private async write(who: string, message: string) {
+  private write(who: string, message: string) {
     for (const content of message.split('\n')) {
       this.rl.write(`<${who}>: ${content}\n`);
     }

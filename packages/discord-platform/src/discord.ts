@@ -1,6 +1,11 @@
-import { Client, Message, TextChannel, DMChannel, Channel, MessageOptions, MessageEmbedOptions } from 'discord.js';
+import { Client, Message, TextChannel, DMChannel, Channel, MessageOptions, MessageEmbedOptions, PresenceStatusData } from 'discord.js';
 
-import { ChocoPlatform, ChocoMessage, ChocoUser, ChocoMessageOptions } from '@team-choco/core';
+import { ChocoPlatform, ChocoMessage, ChocoUser, ChocoMessageOptions, ChocoStatus, ChocoStatuses } from '@team-choco/core';
+
+export const DiscordStatuses: ChocoStatuses<PresenceStatusData> = {
+  online: 'online',
+  invisible: 'invisible',
+};
 
 export class ChocoDiscordPlatform extends ChocoPlatform {
   private client: Client;
@@ -37,6 +42,17 @@ export class ChocoDiscordPlatform extends ChocoPlatform {
       id: this.client.user.id,
       username: this.client.user.username,
     };
+  }
+
+  async status(status: ChocoStatus, activity: string): Promise<void> {
+    if (!this.client.user) return;
+
+    await Promise.all([
+      this.client.user.setStatus(DiscordStatuses[status]),
+      this.client.user.setActivity(activity, {
+        type: 'PLAYING',
+      }),
+    ]);
   }
 
   async pristineSend(channelID: string, options: ChocoMessageOptions): Promise<ChocoMessage> {

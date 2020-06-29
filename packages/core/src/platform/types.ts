@@ -32,6 +32,14 @@ export abstract class ChocoPlatform extends EventEmitter {
   }
 
   /**
+   * Updates the bots status.
+   *
+   * @param status - the new status
+   * @param activity - the activity message
+   */
+  public abstract status(status: ChocoStatus, activity: string): Promise<void>;
+
+  /**
    * Destroys all of the client connections.
    */
   public abstract destroy(): Promise<void>;
@@ -136,4 +144,11 @@ export interface ChocoMessageOptionsField {
    * Whether the field should be displayed inline.
    */
   inline?: boolean;
+}
+
+export type ChocoStatus = keyof ChocoStatuses<any>;
+
+export interface ChocoStatuses<T> {
+  online: T;
+  invisible: T;
 }

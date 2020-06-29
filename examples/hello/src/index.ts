@@ -31,8 +31,10 @@ bot.command('welcome <...name>', async ({ message, args }) => {
   });
 });
 
-bot.on('ready', () => {
+bot.on('ready', async () => {
   console.log('Kweh! Choco Bot is now up and running!');
+
+  await bot.platform.status('online', 'Use !help');
 });
 
 process.on('SIGINT', async () => {
