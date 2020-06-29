@@ -1,15 +1,25 @@
 import { ChocoPlugin, ChocoBotCore, ChocoMessage } from '@team-choco/core';
 import { ChocoCommand, ChocoCommandListener } from './command';
 import { ChocoArgs } from './command/args';
+import { ChocoCommandListenerDetails } from '../dist';
+
+export interface ChocoCommandListenerDetailsError extends ChocoCommandListenerDetails {
+  error: any;
+}
 
 declare module '@team-choco/core' {
   interface ChocoBotCore {
+    emit(event: '@team-choco/command-plugin:before', details: ChocoCommandListenerDetails): this;
+    emit(event: '@team-choco/command-plugin:after', details: ChocoCommandListenerDetails): this;
+    emit(event: '@team-choco/command-plugin:error', details: ChocoCommandListenerDetailsError): this;
+
     command: (pattern: string, listener: ChocoCommandListener) => ChocoCommand;
   }
 }
 
 export class ChocoCommandPlugin implements ChocoPlugin {
   private options: ChocoCommandPluginOptions;
+  private bot!: ChocoBotCore;
   public commands: ChocoCommand[] = [];
 
   constructor(options: ChocoCommandPluginOptions) {
@@ -20,9 +30,11 @@ export class ChocoCommandPlugin implements ChocoPlugin {
   }
 
   register(bot: ChocoBotCore): void {
-    bot.command = this.command;
+    this.bot = bot;
 
-    bot.on('message', this.onMessage);
+    this.bot.command = this.command;
+
+    this.bot.on('message', this.onMessage);
   }
 
   command(pattern: string, listener: ChocoCommandListener): ChocoCommand {
@@ -36,7 +48,7 @@ export class ChocoCommandPlugin implements ChocoPlugin {
     return command;
   }
 
-  private onMessage(message: ChocoMessage): void {
+  private async onMessage(message: ChocoMessage): Promise<void> {
     // Bail early if our prefix doesn't match.
     if (!message.content.startsWith(this.options.prefix)) return;
 
@@ -45,10 +57,23 @@ export class ChocoCommandPlugin implements ChocoPlugin {
     // Bail early if we couldn't find a matching command
     if (!command) return;
 
-    command.exec({
+    const details: ChocoCommandListenerDetails = {
       message,
       args: command.parse(message.content) as ChocoArgs,
-    });
+    };
+
+    this.bot.emit('@team-choco/command-plugin:before', details);
+
+    try {
+      await command.exec(details);
+
+      this.bot.emit('@team-choco/command-plugin:after', details);
+    } catch (error) {
+      this.bot.emit('@team-choco/command-plugin:error', {
+        ...details,
+        error,
+      });
+    }
   }
 }
 
