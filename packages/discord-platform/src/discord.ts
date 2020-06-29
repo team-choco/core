@@ -2,6 +2,8 @@ import { Client, Message, TextChannel, DMChannel, Channel, MessageOptions, Messa
 
 import { ChocoPlatform, ChocoMessage, ChocoUser, ChocoMessageOptions, ChocoStatus, ChocoStatuses } from '@team-choco/core';
 
+import { ChocoDiscordPlatformOptions } from './types';
+
 export const DiscordStatuses: ChocoStatuses<PresenceStatusData> = {
   online: 'online',
   invisible: 'invisible',
@@ -113,11 +115,4 @@ export class ChocoDiscordPlatform extends ChocoPlatform {
   private isTextBasedChannel(channel: Channel): channel is (DMChannel|TextChannel) {
     return ['dm', 'text'].includes(channel.type);
   }
-}
-
-export interface ChocoDiscordPlatformOptions {
-  /**
-   * The Discord API Token.
-   */
-  token: string;
 }
