@@ -16,6 +16,10 @@ export function getChocoPlatform(type: 'DISCORD'): ChocoDiscordPlatform;
 export function getChocoPlatform(type: ChocoPlatformType): ChocoPlatform;
 export function getChocoPlatform(type: ChocoPlatformType): ChocoPlatform {
   if (type === 'DISCORD') {
+    if (!CONFIG.DISCORD_TOKEN) {
+      throw new Error(`Expected token to be provided via "DISCORD_TOKEN".`);
+    }
+
     return new ChocoDiscordPlatform({
       token: CONFIG.DISCORD_TOKEN,
     })

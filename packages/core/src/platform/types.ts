@@ -27,7 +27,7 @@ export interface ChocoMessage {
    * @param message - the message you wish to send.
    * @returns the new message
    */
-  reply(message: (string|ChocoMessageOptions)): Promise<ChocoMessage>;
+  reply(message: (string|ChocoRawMessageOptions)): Promise<ChocoMessage>;
 }
 
 export interface ChocoMessageOptions {

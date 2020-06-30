@@ -5,19 +5,19 @@
   "description": "When you just really want a hello world example!",
   "main": "src/index.ts",
   "dependencies": {
-    "@team-choco/core": "^0.0.0",
-    "@team-choco/command-plugin": "^0.0.0",
-    "@team-choco/example-helpers": "^0.0.0"
+    "@team-choco/core": "^0.1.5",
+    "@team-choco/command-plugin": "^0.1.5",
+    "@team-choco/example-helpers": "^0.1.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.5"
   },
   "scripts": {
     "start": "ts-node .",
     "build": "microbundle --target node -f es,cjs"
   },
   "author": "",
-  "license": "MIT",
-  "devDependencies": {
-    "nodemon": "^2.0.4",
-    "ts-node": "^8.10.2",
-    "typescript": "^3.9.5"
-  }
+  "license": "MIT"
 }
