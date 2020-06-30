@@ -1,2 +1,3 @@
-export { ChocoDiscordPlatform } from './discord';
 export * from './types';
+
+export { ChocoDiscordPlatform } from './discord';

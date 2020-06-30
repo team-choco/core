@@ -1,6 +1,7 @@
-import { toChocoPattern, ChocoPattern } from './pattern';
-import { toChocoArgs, ChocoArgs } from './args';
-import { ChocoMessage } from '@team-choco/core';
+import { toChocoPattern } from '../pattern';
+import { ChocoArgs, toChocoArgs } from '../args';
+
+import { ChocoCommandListenerDetails, ChocoRawCommandOptions, ChocoCommandOptions } from './types';
 
 export class ChocoCommand {
   private options: ChocoCommandOptions;
@@ -25,21 +26,4 @@ export class ChocoCommand {
   async exec(options: ChocoCommandListenerDetails): Promise<void> {
     await this.options.listener(options);
   }
-}
-
-export interface ChocoRawCommandOptions {
-  pattern: string;
-  listener: ChocoCommandListener;
-}
-
-export interface ChocoCommandOptions {
-  pattern: ChocoPattern;
-  listener: ChocoCommandListener;
-}
-
-export type ChocoCommandListener = (details: ChocoCommandListenerDetails) => void;
-
-export interface ChocoCommandListenerDetails {
-  message: ChocoMessage;
-  args: ChocoArgs;
 }

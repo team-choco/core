@@ -34,7 +34,9 @@ export abstract class ChocoPlatform extends EventEmitter {
    */
   private normalize(options: (string|ChocoRawMessageOptions)): ChocoMessageOptions {
     if (typeof options === 'string') {
-      return this.normalize(options);
+      return this.normalize({
+        content: options,
+      });
     }
 
     return {

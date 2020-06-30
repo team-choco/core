@@ -1,4 +1,6 @@
-import { PositionalArgumentDetails } from './pattern';
+import { PositionalArgumentDetails } from '../pattern';
+
+import { ChocoArgs } from './types';
 
 export function toChocoArgs(message: string, args: PositionalArgumentDetails[]): ChocoArgs {
   const clonedArgs = [...args];
@@ -34,10 +36,4 @@ export function toChocoArgs(message: string, args: PositionalArgumentDetails[]):
   }
 
   return output;
-}
-
-export interface ChocoArgs {
-  [key: string]: any;
-
-  _: string[];
 }

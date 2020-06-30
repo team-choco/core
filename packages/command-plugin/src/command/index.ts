@@ -1,2 +1,3 @@
-export { ChocoCommand } from './command';
-export type { ChocoCommandListener, ChocoCommandListenerDetails } from './command';
+export * from './types';
+
+export * from './command';

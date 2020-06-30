@@ -1,7 +1,9 @@
 import readline from 'readline';
 
 import { ChocoPlatform, ChocoMessage, ChocoUser, ChocoMessageOptions, ChocoStatus } from '@team-choco/core';
+
 import { convertChocoMessageOptionsToContent } from './utils/converter';
+import { ChocoShellPlatformInternalOptions, ChocoShellPlatformOptions } from './types';
 
 export class ChocoShellPlatform extends ChocoPlatform {
   private options: ChocoShellPlatformInternalOptions;
@@ -99,22 +101,4 @@ export class ChocoShellPlatform extends ChocoPlatform {
       this.rl.write(`<${who}>: ${content}\n`);
     }
   }
-}
-
-export interface ChocoShellPlatformInternalOptions extends ChocoShellPlatformOptions {
-  whoami: string;
-}
-
-export interface ChocoShellPlatformOptions {
-  /**
-   * The bots username.
-   */
-  name: string;
-
-  /**
-   * Your username.
-   *
-   * @defaultValue 'user'
-   */
-  whoami?: string;
 }
