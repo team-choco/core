@@ -13,6 +13,8 @@ const bot = new ChocoBotCore({
 });
 
 bot.command('hello', async ({ message }) => {
+  await message.react('👍');
+  
   await message.reply(`It's nice to meet you ${message.author.username}`);
 });
 

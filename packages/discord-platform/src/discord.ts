@@ -88,12 +88,16 @@ export class ChocoDiscordPlatform extends ChocoPlatform {
     const message = await channel.send(content);
 
     return {
+      id: message.id,
       author: {
         id: info.id,
         username: info.username,
       },
       content: message.content,
       reply: this.send.bind(this, channelID),
+      react: async (emoji: string) => {
+        await message.react(emoji);
+      },
     };
   }
 
@@ -103,12 +107,16 @@ export class ChocoDiscordPlatform extends ChocoPlatform {
 
   private async onMessage(message: Message) {
     this.emit('message', {
+      id: message.id,
       author: {
         id: message.author.id,
         username: message.author.username,
       },
       content: message.content,
       reply: this.send.bind(this, message.channel.id),
+      react: async (emoji: string) => {
+        await message.react(emoji);
+      },
     });
   }
 

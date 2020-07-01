@@ -6,11 +6,22 @@ import { convertChocoMessageOptionsToContent } from './utils/converter';
 import { ChocoShellPlatformInternalOptions, ChocoShellPlatformOptions } from './types';
 
 export class ChocoShellPlatform extends ChocoPlatform {
+  private counters: {
+    message: number;
+    reactions: number;
+  };
+
   private options: ChocoShellPlatformInternalOptions;
   private rl: readline.Interface;
 
   constructor(options: ChocoShellPlatformOptions) {
     super();
+
+    this.counters = {
+      message: 0,
+      reactions: 0,
+    };
+
     this.options = {
       whoami: 'User',
       ...options,
@@ -46,13 +57,19 @@ export class ChocoShellPlatform extends ChocoPlatform {
 
     this.write(this.options.name, content);
 
+    const id = this.counters.message++;
+
     return {
+      id: id.toString(),
       author: {
         id: info.id,
         username: info.username,
       },
       content: content,
       reply: this.send.bind(this, channelID),
+      react: async (emoji: string) => {
+        this.write('SYSTEM', `${this.who(this.options.name)} reacted with "${emoji}" to message "${id}".`)
+      }
     };
   }
 
@@ -80,13 +97,19 @@ export class ChocoShellPlatform extends ChocoPlatform {
       this.write(this.options.whoami, content);
     }
 
+    const id = this.counters.message++;
+
     this.emit('message', {
+      id: id.toString(),
       author: {
         id: who || this.options.whoami,
         username: who || this.options.whoami,
       },
       content: content.trim(),
       reply: this.send.bind(this, ''),
+      react: async (emoji: string) => {
+        this.write('SYSTEM', `${this.who(this.options.name)} reacted with "${emoji}" to message "${id}".`)
+      }
     });
   }
 
@@ -96,9 +119,13 @@ export class ChocoShellPlatform extends ChocoPlatform {
     await new Promise((resolve) => readline.clearLine(process.stdout, 0, resolve));
   }
 
+  private who(who: string) {
+    return `<${who}>`;
+  }
+
   private write(who: string, message: string) {
     for (const content of message.split('\n')) {
-      this.rl.write(`<${who}>: ${content}\n`);
+      this.rl.write(`${this.who(who)}: ${content}\n`);
     }
   }
 }

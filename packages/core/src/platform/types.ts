@@ -1,17 +1,22 @@
 export interface ChocoUser {
   /**
-   * The ID of the bot.
+   * The user's id.
    */
   id: string;
 
   /**
-   * The username of the bot.
+   * The user's username.
    */
   username: string;
 }
 
 
 export interface ChocoMessage {
+  /**
+   * The id of the message.
+   */
+  id: string;
+
   /**
    * The Author of the message.
    */
@@ -28,6 +33,13 @@ export interface ChocoMessage {
    * @returns the new message
    */
   reply(message: (string|ChocoRawMessageOptions)): Promise<ChocoMessage>;
+
+  /**
+   * Reacts to the message.
+   * 
+   * @param emoji - the emoji to react with.
+   */
+  react(emoji: string): Promise<void>;
 }
 
 export interface ChocoMessageOptions {
