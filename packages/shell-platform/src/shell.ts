@@ -125,7 +125,7 @@ export class ChocoShellPlatform extends ChocoPlatform {
 
   private write(who: string, message: string) {
     for (const content of message.split('\n')) {
-      this.rl.write(`${this.who(who)}: ${content}\n`);
+      console.log(`${this.who(who)}: ${content}`);
     }
   }
 }
