@@ -5,7 +5,11 @@ import { ChocoPlatform, ChocoMessage, ChocoUser, ChocoMessageOptions, ChocoStatu
 import { convertChocoMessageOptionsToContent } from './utils/converter';
 import { ChocoShellPlatformInternalOptions, ChocoShellPlatformOptions } from './types';
 
+export const CHANNEL_ID = 'channel-id';
+
 export class ChocoShellPlatform extends ChocoPlatform {
+  private messages: ChocoMessage[] = [];
+
   private counters: {
     message: number;
     reactions: number;
@@ -55,22 +59,55 @@ export class ChocoShellPlatform extends ChocoPlatform {
 
     const content = convertChocoMessageOptionsToContent(options);
 
-    this.write(this.options.name, content);
+    const id = (this.counters.message++).toString();
 
-    const id = this.counters.message++;
+    this.write(this.options.name, content, id);
 
-    return {
-      id: id.toString(),
+    const message: ChocoMessage = {
+      id: id,
       author: {
         id: info.id,
         username: info.username,
       },
       content: content,
       reply: this.send.bind(this, channelID),
-      react: async (emoji: string) => {
-        this.write('SYSTEM', `${this.who(this.options.name)} reacted with "${emoji}" to message "${id}".`)
-      }
+      edit: this.edit.bind(this, channelID, id),
+      react: this.react.bind(this, channelID, id),
     };
+
+    this.messages.push(message);
+
+    return message;
+  }
+
+  protected async pristineEdit(channelID: string, messageID: string, options: ChocoMessageOptions): Promise<ChocoMessage> {
+    options.content = options.content ? `EDIT: ${options.content}` : 'EDIT';
+
+    const info = this.info();
+
+    const content = convertChocoMessageOptionsToContent(options);
+
+    this.write(this.options.name, content, messageID);
+
+    const message: ChocoMessage = {
+      id: messageID,
+      author: {
+        id: info.id,
+        username: info.username,
+      },
+      content: content,
+      reply: this.send.bind(this, channelID),
+      edit: this.edit.bind(this, channelID, messageID),
+      react: this.react.bind(this, channelID, messageID),
+    };
+
+    this.messages.push(message);
+
+    return message;
+  }
+
+  protected async pristineReact(messageID: string, emoji: string): Promise<void> {
+    this.write('SYSTEM', `${this.prefix(this.options.name)} reacted with "${emoji}" to message "${messageID}".`)
   }
 
   async status(status: ChocoStatus, activity: string): Promise<void> {
@@ -83,34 +120,39 @@ export class ChocoShellPlatform extends ChocoPlatform {
   }
 
   private async onMessage(message: string) {
-    const match = message.match(/^(?:<([^>]+)>:)?(.+)/);
+    const match = message.match(/^(?:\[(\d+)\])?(?:<([^>]+)>:)?(.+)/);
 
     if (!match) return;
 
-    const [, who, content] = match;
+    const [, , who, content] = match;
 
     if ([this.options.name, this.options.whoami].includes(who)) return;
+
+    const id = (this.counters.message++).toString();
 
     // Handle it!
     if (!who) {
       await this.clear(-1);
-      this.write(this.options.whoami, content);
+      this.write(this.options.whoami, content, id);
     }
 
-    const id = this.counters.message++;
+    const author = who || this.options.whoami;
 
-    this.emit('message', {
-      id: id.toString(),
+    const chocoMessage: ChocoMessage = {
+      id: id,
       author: {
-        id: who || this.options.whoami,
-        username: who || this.options.whoami,
+        id: author,
+        username: author,
       },
       content: content.trim(),
-      reply: this.send.bind(this, ''),
-      react: async (emoji: string) => {
-        this.write('SYSTEM', `${this.who(this.options.name)} reacted with "${emoji}" to message "${id}".`)
-      }
-    });
+      reply: this.send.bind(this, CHANNEL_ID),
+      edit: this.edit.bind(this, CHANNEL_ID, id),
+      react: this.react.bind(this, CHANNEL_ID, id),
+    };
+
+    this.messages.push(chocoMessage);
+
+    this.emit('message', chocoMessage);
   }
 
   private async clear(line: number) {
@@ -119,13 +161,17 @@ export class ChocoShellPlatform extends ChocoPlatform {
     await new Promise((resolve) => readline.clearLine(process.stdout, 0, resolve));
   }
 
-  private who(who: string) {
+  private prefix(who: string, id?: string) {
+    if (id) {
+      return `[${id}] <${who}>`;
+    }
+
     return `<${who}>`;
   }
 
-  private write(who: string, message: string) {
+  private write(who: string, message: string, id?: string) {
     for (const content of message.split('\n')) {
-      console.log(`${this.who(who)}: ${content}`);
+      console.log(`${this.prefix(who, id)}: ${content}`);
     }
   }
 }

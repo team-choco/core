@@ -35,8 +35,15 @@ export interface ChocoMessage {
   reply(message: (string|ChocoRawMessageOptions)): Promise<ChocoMessage>;
 
   /**
+   * Modifies the current message.
+   * @param message - the updated message.
+   * @returns the updated message
+   */
+  edit(message: (string|ChocoRawMessageOptions)): Promise<ChocoMessage>;
+
+  /**
    * Reacts to the message.
-   * 
+   *
    * @param emoji - the emoji to react with.
    */
   react(emoji: string): Promise<void>;
