@@ -1,22 +1,17 @@
 export interface ChocoUser {
   /**
-   * The user's id.
+   * The ID of the bot.
    */
   id: string;
 
   /**
-   * The user's username.
+   * The username of the bot.
    */
   username: string;
 }
 
 
 export interface ChocoMessage {
-  /**
-   * The id of the message.
-   */
-  id: string;
-
   /**
    * The Author of the message.
    */
@@ -28,25 +23,29 @@ export interface ChocoMessage {
   content: string;
 
   /**
+   * Whether this message originated from a Server or a DM.
+   */
+  type: ('server'|'dm');
+
+  /**
    * Replies to the given message.
    * @param message - the message you wish to send.
    * @returns the new message
    */
   reply(message: (string|ChocoRawMessageOptions)): Promise<ChocoMessage>;
+}
+
+export interface ChocoMessageDM extends ChocoMessage {
+  type: 'dm';
+}
+
+export interface ChocoMessageServer extends ChocoMessage {
+  type: 'server';
 
   /**
-   * Modifies the current message.
-   * @param message - the updated message.
-   * @returns the updated message
+   * The ID of the server the message was sent from.
    */
-  edit(message: (string|ChocoRawMessageOptions)): Promise<ChocoMessage>;
-
-  /**
-   * Reacts to the message.
-   *
-   * @param emoji - the emoji to react with.
-   */
-  react(emoji: string): Promise<void>;
+  server_id: string;
 }
 
 export interface ChocoMessageOptions {

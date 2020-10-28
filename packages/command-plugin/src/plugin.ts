@@ -7,13 +7,9 @@ import { ChocoCommandListenerDetailsError } from './types';
 
 declare module '@team-choco/core' {
   interface ChocoBotCore {
-    emit(event: '@team-choco/command-plugin:before', details: ChocoCommandListenerDetails): boolean;
-    emit(event: '@team-choco/command-plugin:after', details: ChocoCommandListenerDetails): boolean;
-    emit(event: '@team-choco/command-plugin:error', details: ChocoCommandListenerDetailsError): boolean;
-
-    on(event: '@team-choco/command-plugin:before', listener: (details: ChocoCommandListenerDetails) => void): this;
-    on(event: '@team-choco/command-plugin:after', listener: (details: ChocoCommandListenerDetails) => void): this;
-    on(event: '@team-choco/command-plugin:error', listener: (details: ChocoCommandListenerDetailsError) => void): this;
+    emit(event: '@team-choco/command-plugin:before', details: ChocoCommandListenerDetails): this;
+    emit(event: '@team-choco/command-plugin:after', details: ChocoCommandListenerDetails): this;
+    emit(event: '@team-choco/command-plugin:error', details: ChocoCommandListenerDetailsError): this;
 
     command: (pattern: string, listener: ChocoCommandListener) => ChocoCommand;
   }
