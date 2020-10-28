@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events';
-import { ChocoPlatform, ChocoMessage } from './platform';
+import { ChocoPlatform, ChocoMessage, ChocoMessageServer, ChocoMessageDM } from './platform';
 
 export class ChocoBotCore extends EventEmitter {
   public platform: ChocoPlatform;
@@ -26,6 +26,14 @@ export class ChocoBotCore extends EventEmitter {
 
   public async login(): Promise<void> {
     await this.platform.login();
+  }
+
+  isServerMessage(message: ChocoMessage): message is ChocoMessageServer {
+    return message.type === 'server';
+  }
+
+  isDM(message: ChocoMessage): message is ChocoMessageDM {
+    return message.type === 'dm';
   }
 
   register(...plugins: ChocoPlugin[]): void {
