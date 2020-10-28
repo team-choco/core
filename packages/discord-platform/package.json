@@ -1,6 +1,6 @@
 {
   "name": "@team-choco/discord-platform",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "Connect your bot to Discord!",
   "repository": {
     "type": "git",
@@ -18,7 +18,7 @@
   "module": "dist/shell-platform.module.js",
   "types": "dist/index.d.ts",
   "dependencies": {
-    "@team-choco/core": "^0.1.11",
+    "@team-choco/core": "^0.1.12",
     "discord.js": "^12.2.0"
   },
   "devDependencies": {
