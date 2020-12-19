@@ -18,3 +18,7 @@ export interface ChocoCommandListenerDetails {
   message: ChocoMessage;
   args: ChocoArgs;
 }
+
+export interface ChocoCommandListenerDetailsError extends ChocoCommandListenerDetails {
+  error: any;
+}

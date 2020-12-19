@@ -1,9 +1,7 @@
 import { ChocoPlugin, ChocoBotCore, ChocoMessage } from '@team-choco/core';
 
-import { ChocoCommand, ChocoCommandListener, ChocoCommandListenerDetails } from './command';
+import { ChocoCommand, ChocoCommandListener, ChocoCommandListenerDetails, ChocoCommandListenerDetailsError } from './command';
 import { ChocoArgs } from './args';
-
-import { ChocoCommandListenerDetailsError } from './types';
 
 declare module '@team-choco/core' {
   interface ChocoBotCore {
