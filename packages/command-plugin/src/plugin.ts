@@ -27,12 +27,14 @@ export class ChocoCommandPlugin implements ChocoPlugin {
 
     this.command = this.command.bind(this);
     this.onMessage = this.onMessage.bind(this);
-  }
 
+  }
+  
   register(bot: ChocoBotCore): void {
     this.bot = bot;
-
+    
     this.bot.command = this.command;
+    this.bot.commands = [];
 
     this.bot.on('message', this.onMessage);
   }
