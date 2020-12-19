@@ -29,6 +29,7 @@ export abstract class ChocoPlatform extends EventEmitter {
   /**
    * Edits a message.
    *
+   * @param channelID - the id of the channel the message is in.
    * @param messageID - the id of the message to edit.
    * @param options - the updated message.
    * @returns the updated message
@@ -46,6 +47,15 @@ export abstract class ChocoPlatform extends EventEmitter {
   public async react(channelID: string, messageID: string, emoji: string): Promise<void> {
     await this.pristineReact(channelID, messageID, emoji);
   }
+
+  /**
+   * Returns a message that matches the given criteria.
+   * 
+   * @param channelID - the id of the server the channel is in.
+   * @param channelID - the id of the channel the message is in.
+   * @param messageID - the id of the message to edit.
+   */
+  public abstract message(serverID: string, channelID: string, messageID: string): Promise<(ChocoMessage|null)>;
 
   /**
    * Normalizes the message options.
