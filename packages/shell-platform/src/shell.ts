@@ -54,6 +54,10 @@ export class ChocoShellPlatform extends ChocoPlatform {
     this.emit('ready');
   }
 
+  message(serverID: string, channelID: string, messageID: string): Promise<ChocoMessageServer | null> {
+    throw new Error('Method not implemented.');
+  }
+
   protected async pristineSend(channelID: string, options: ChocoMessageOptions): Promise<ChocoMessageServer> {
     const info = this.info();
 

@@ -46,6 +46,10 @@ export class ChocoDiscordPlatform extends ChocoPlatform {
     };
   }
 
+  message(serverID: string, channelID: string, messageID: string): Promise<ChocoMessage | null> {
+    throw new Error('Method not implemented.');
+  }
+
   async status(status: ChocoStatus, activity: string): Promise<void> {
     if (!this.client.user) return;
 
