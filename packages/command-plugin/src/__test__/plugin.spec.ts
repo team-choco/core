@@ -2,6 +2,7 @@ import { sinon, chance, SinonStub, wait } from '@team-choco/test-helpers';
 import { ChocoBotCore } from '@team-choco/core';
 
 import { ChocoCommandPlugin } from '../plugin';
+import { ChocoCommandListener } from '../command';
 
 describe('class(ChocoCommandPlugin)', () => {
   let bot: ChocoBotCore;

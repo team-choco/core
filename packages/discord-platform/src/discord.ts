@@ -1,6 +1,6 @@
 import { Client, Message, TextChannel, DMChannel, Channel, MessageOptions, MessageEmbedOptions, PresenceStatusData } from 'discord.js';
 
-import { ChocoPlatform, ChocoMessage, ChocoUser, ChocoMessageOptions, ChocoStatus, ChocoStatuses } from '@team-choco/core';
+import { ChocoPlatform, ChocoMessage, ChocoUser, ChocoMessageOptions, ChocoStatus, ChocoStatuses, ChocoEmbed } from '@team-choco/core';
 
 import { ChocoDiscordPlatformOptions } from './types';
 
@@ -66,23 +66,9 @@ export class ChocoDiscordPlatform extends ChocoPlatform {
       throw new Error(`Channel must be either a "text" or "dm" channel. (${channelID})`);
     }
 
-    const embed: (undefined|MessageEmbedOptions) = options.embed ? {
-      ...(options.embed.title ? {
-        title: options.embed.title.content,
-        url: options.embed.title.url,
-      } : undefined),
-      description: options.embed.content,
-      color: options.embed.color ? parseInt(options.embed.color, 16) : undefined,
-      fields: options.embed.fields,
-      footer: options.embed.footer ? {
-        text: options.embed.footer.content,
-        iconURL: options.embed.footer.iconURL,
-      } : undefined,
-    } : undefined;
-
     const content: MessageOptions = {
       content: options.content,
-      embed: embed,
+      embed: this.normalizeEmbed(options.embed),
     };
 
     const message = await channel.send(content);
@@ -94,13 +80,65 @@ export class ChocoDiscordPlatform extends ChocoPlatform {
       } : {
         type: 'dm',
       }),
+      id: message.id,
       author: {
         id: info.id,
         username: info.username,
       },
       content: message.content,
-      reply: this.send.bind(this, channelID),
+      reply: this.send.bind(this, message.channel.id),
+      edit: this.edit.bind(this, message.channel.id, message.id),
+      react: this.react.bind(this, message.channel.id, message.id),
     };
+  }
+
+  async pristineEdit(channelID: string, messageID: string, options: ChocoMessageOptions): Promise<ChocoMessage> {
+    const info = this.info(true);
+
+    const channel = await this.client.channels.fetch(channelID);
+
+    if (!this.isTextBasedChannel(channel)) {
+      throw new Error(`Channel must be either a "text" or "dm" channel. (${channelID})`);
+    }
+
+    const message = await channel.messages.fetch(messageID);
+
+    const content: MessageOptions = {
+      content: options.content,
+      embed: this.normalizeEmbed(options.embed),
+    };
+
+    const updatedMessage = await message.edit(content);
+
+    return {
+      ...(message.guild ? {
+        type: 'server',
+        server_id: message.guild.id,
+      } : {
+        type: 'dm',
+      }),
+      id: updatedMessage.id,
+      author: {
+        id: info.id,
+        username: info.username,
+      },
+      content: updatedMessage.content,
+      reply: this.send.bind(this, updatedMessage.channel.id),
+      edit: this.edit.bind(this, updatedMessage.channel.id, updatedMessage.id),
+      react: this.react.bind(this, updatedMessage.channel.id, updatedMessage.id),
+    };
+  }
+
+  async pristineReact(channelID: string, messageID: string, emoji: string): Promise<void> {
+    const channel = await this.client.channels.fetch(channelID);
+
+    if (!this.isTextBasedChannel(channel)) {
+      throw new Error(`Channel must be either a "text" or "dm" channel. (${channelID})`);
+    }
+
+    const message = await channel.messages.fetch(messageID);
+
+    await message.react(emoji);
   }
 
   async destroy(): Promise<void> {
@@ -115,16 +153,35 @@ export class ChocoDiscordPlatform extends ChocoPlatform {
       } : {
         type: 'dm',
       }),
+      id: message.id,
       author: {
         id: message.author.id,
         username: message.author.username,
       },
       content: message.content,
       reply: this.send.bind(this, message.channel.id),
+      edit: this.edit.bind(this, message.channel.id, message.id),
+      react: this.react.bind(this, message.channel.id, message.id),
     });
   }
 
   private isTextBasedChannel(channel: Channel): channel is (DMChannel|TextChannel) {
     return ['dm', 'text'].includes(channel.type);
+  }
+
+  private normalizeEmbed(embed?: ChocoEmbed): (undefined|MessageEmbedOptions) {
+    return embed ? {
+      ...(embed.title ? {
+        title: embed.title.content,
+        url: embed.title.url,
+      } : undefined),
+      description: embed.content,
+      color: embed.color ? parseInt(embed.color, 16) : undefined,
+      fields: embed.fields,
+      footer: embed.footer ? {
+        text: embed.footer.content,
+        iconURL: embed.footer.iconURL,
+      } : undefined,
+    } : undefined;
   }
 }

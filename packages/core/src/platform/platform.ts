@@ -27,6 +27,27 @@ export abstract class ChocoPlatform extends EventEmitter {
   }
 
   /**
+   * Edits a message.
+   *
+   * @param messageID - the id of the message to edit.
+   * @param options - the updated message.
+   * @returns the updated message
+   */
+  public edit(channelID: string, messageID: string, options: (string|ChocoRawMessageOptions)): Promise<ChocoMessage> {
+    return this.pristineEdit(channelID, messageID, this.normalize(options));
+  }
+
+  /**
+   * Reacts to the message.
+   *
+   * @param messageID - the id of the message to react to.
+   * @param emoji - the emoji to react with.
+   */
+  public async react(channelID: string, messageID: string, emoji: string): Promise<void> {
+    await this.pristineReact(channelID, messageID, emoji);
+  }
+
+  /**
    * Normalizes the message options.
    *
    * @param options - The raw message options.
@@ -64,6 +85,8 @@ export abstract class ChocoPlatform extends EventEmitter {
   public abstract destroy(): Promise<void>;
 
   protected abstract pristineSend(channelID: string, options: ChocoMessageOptions): Promise<ChocoMessage>;
+  protected abstract pristineEdit(channelID: string, messageID: string, options: ChocoMessageOptions): Promise<ChocoMessage>;
+  protected abstract pristineReact(channelID: string, messageID: string, emoji: string): Promise<void>;
 }
 
 export interface ChocoPlatform {
