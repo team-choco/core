@@ -1,6 +1,6 @@
 {
   "name": "@team-choco/discord-platform",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "description": "Connect your bot to Discord!",
   "repository": {
     "type": "git",
