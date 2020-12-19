@@ -14,13 +14,13 @@ declare module '@team-choco/core' {
     on(event: '@team-choco/command-plugin:error', listener: (details: ChocoCommandListenerDetailsError) => void): this;
 
     command: (pattern: string, listener: ChocoCommandListener) => ChocoCommand;
+    commands: ChocoCommand[];
   }
 }
 
 export class ChocoCommandPlugin implements ChocoPlugin {
   private options: ChocoCommandPluginOptions;
   private bot!: ChocoBotCore;
-  public commands: ChocoCommand[] = [];
 
   constructor(options: ChocoCommandPluginOptions) {
     this.options = options;
@@ -43,7 +43,7 @@ export class ChocoCommandPlugin implements ChocoPlugin {
       listener,
     });
 
-    this.commands.push(command);
+    this.bot.commands.push(command);
 
     return command;
   }
@@ -52,7 +52,7 @@ export class ChocoCommandPlugin implements ChocoPlugin {
     // Bail early if our prefix doesn't match.
     if (!message.content.startsWith(this.options.prefix)) return;
 
-    const command = this.commands.find((command) => command.parse(message.content));
+    const command = this.bot.commands.find((command) => command.parse(message.content));
 
     // Bail early if we couldn't find a matching command
     if (!command) return;

@@ -32,13 +32,13 @@ describe('class(ChocoCommandPlugin)', () => {
         prefix: '!',
       });
 
-      expect(plugin.commands).toHaveLength(0);
-
       plugin.register(bot);
+
+      expect(bot.commands).toHaveLength(0);
 
       bot.command(chance.word(), sinon.stub());
 
-      expect(plugin.commands).toHaveLength(1);
+      expect(bot.commands).toHaveLength(1);
     });
   });
 
