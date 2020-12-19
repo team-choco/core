@@ -1,6 +1,6 @@
 {
   "name": "@team-choco/core",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "The foundation of all things Choco Bot!",
   "repository": {
     "type": "git",
