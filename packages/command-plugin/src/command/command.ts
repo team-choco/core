@@ -4,7 +4,7 @@ import { ChocoArgs, toChocoArgs } from '../args';
 import { ChocoCommandListenerDetails, ChocoRawCommandOptions, ChocoCommandOptions } from './types';
 
 export class ChocoCommand {
-  private options: ChocoCommandOptions;
+  public options: ChocoCommandOptions;
 
   constructor(options: ChocoRawCommandOptions) {
     this.options = {
