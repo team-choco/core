@@ -1,6 +1,6 @@
 {
   "name": "@team-choco/command-plugin",
-  "version": "0.1.16",
+  "version": "0.1.18",
   "description": "Adds the ability to register commands to Choco Bot Core!",
   "repository": {
     "type": "git",
