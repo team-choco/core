@@ -1,6 +1,6 @@
 {
   "name": "@team-choco/shell-platform",
-  "version": "0.1.17",
+  "version": "0.1.19",
   "description": "Connect your bot to your local Shell!",
   "repository": {
     "type": "git",
