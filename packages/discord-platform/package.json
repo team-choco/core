@@ -14,8 +14,8 @@
   },
   "homepage": "https://github.com/team-choco/core/tree/master/packages/discord-platform#readme",
   "source": "src/index.ts",
-  "main": "dist/shell-platform.js",
-  "module": "dist/shell-platform.module.js",
+  "main": "dist/discord-platform.js",
+  "module": "dist/discord-platform.module.js",
   "types": "dist/index.d.ts",
   "dependencies": {
     "@team-choco/core": "^0.1.16",

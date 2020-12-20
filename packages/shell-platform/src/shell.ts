@@ -56,7 +56,7 @@ export class ChocoShellPlatform extends ChocoPlatform {
 
   async message(serverID: string, channelID: string, messageID: string): Promise<ChocoMessageServer | null> {
     return this.messages.find((message) => (
-      message.server_id === serverID && message.id === messageID
+      message.id === messageID
     )) || null;
   }
 

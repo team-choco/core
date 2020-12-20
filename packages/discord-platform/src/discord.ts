@@ -57,7 +57,7 @@ export class ChocoDiscordPlatform extends ChocoPlatform {
       throw new Error(`Channel doesn't belong to the given server!`);
     }
 
-    const message = channel.messages.resolve(messageID);
+    const message = await channel.messages.fetch(messageID);
 
     if (message === null) {
       throw new Error(`Message doesn't exist!`);
