@@ -46,8 +46,40 @@ export class ChocoDiscordPlatform extends ChocoPlatform {
     };
   }
 
-  message(serverID: string, channelID: string, messageID: string): Promise<ChocoMessage | null> {
-    throw new Error('Method not implemented.');
+  async message(serverID: string, channelID: string, messageID: string): Promise<ChocoMessage | null> {
+    const channel = await this.client.channels.fetch(channelID) as TextChannel;
+
+    if (channel === null) {
+      throw new Error(`Channel doesn't exist!`);
+    }
+
+    if (channel.guild.id !== serverID) {
+      throw new Error(`Channel doesn't belong to the given server!`);
+    }
+
+    const message = channel.messages.resolve(messageID);
+
+    if (message === null) {
+      throw new Error(`Message doesn't exist!`);
+    }
+
+    return {
+      ...(message.guild ? {
+        type: 'server',
+        server_id: message.guild.id,
+      } : {
+        type: 'dm',
+      }),
+      id: message.id,
+      author: {
+        id: message.author.id,
+        username: message.author.username,
+      },
+      content: message.content,
+      reply: this.send.bind(this, message.channel.id),
+      edit: this.edit.bind(this, message.channel.id, message.id),
+      react: this.react.bind(this, message.channel.id, message.id),
+    };
   }
 
   async status(status: ChocoStatus, activity: string): Promise<void> {
