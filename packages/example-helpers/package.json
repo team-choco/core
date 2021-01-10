@@ -14,9 +14,9 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@team-choco/core": "^0.0.0",
-    "@team-choco/discord-platform": "^0.0.0",
-    "@team-choco/shell-platform": "^0.0.0",
+    "@team-choco/core": "^0.1.16",
+    "@team-choco/discord-platform": "^0.1.20",
+    "@team-choco/shell-platform": "^0.1.20",
     "@types/app-root-path": "^1.2.4",
     "app-root-path": "^3.0.0",
     "dotenv": "^8.2.0"

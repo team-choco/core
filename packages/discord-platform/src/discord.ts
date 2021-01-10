@@ -107,7 +107,8 @@ export class ChocoDiscordPlatform extends ChocoPlatform {
       embed: this.normalizeEmbed(options.embed),
     };
 
-    const message = await channel.send(content);
+    // TODO: Under what scenario could this return multiple messages
+    const message = await channel.send(content) as Message;
 
     return {
       ...(message.guild ? {
