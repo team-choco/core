@@ -53,7 +53,7 @@ export class ChocoDiscordPlatform extends ChocoPlatform {
       throw new Error(`Channel doesn't exist!`);
     }
 
-    if (channel.guild.id !== serverID) {
+    if (serverID !== '@me' && channel.guild.id !== serverID) {
       throw new Error(`Channel doesn't belong to the given server!`);
     }
 
