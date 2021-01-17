@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.26](https://github.com/team-choco/core/compare/v0.1.25...v0.1.26) (2021-01-17)
+
+
+### Bug Fixes
+
+* add support for multiple prefixes ([743c1a2](https://github.com/team-choco/core/commit/743c1a2563b9b56d190fc0756b19958b07fa772e))
+
+
+
+
+
 ## [0.1.25](https://github.com/team-choco/core/compare/v0.1.24...v0.1.25) (2021-01-16)
 
 
