@@ -2,6 +2,8 @@
 
 [![NPM Version][npm-version-image]][npm-url]
 [![NPM Downloads][npm-downloads-image]][npm-url]
+[![Coveralls][coveralls-image]][coveralls-url]
+[![CI][build-image]][build-url]
 
 ### @team-choco/core
 
@@ -73,3 +75,9 @@ bot.on('ready', () => {
 [npm-version-image]: https://img.shields.io/npm/v/@team-choco/core.svg?style=flat
 [npm-downloads-image]: https://img.shields.io/npm/dm/@team-choco/core.svg?style=flat
 [npm-url]: https://npmjs.org/package/@team-choco/core
+
+[coveralls-image]: https://coveralls.io/repos/github/team-choco/core/badge.svg?branch=master
+[coveralls-url]: https://coveralls.io/github/team-choco/core?branch=master
+
+[build-image]: https://github.com/team-choco/core/workflows/CI/badge.svg
+[build-url]: https://github.com/team-choco/core/actions
