@@ -42,7 +42,7 @@ describe('class(ChocoCommandPlugin)', () => {
     });
   });
 
-  describe('func(prefix)', () => {
+  describe('func(prefixes)', () => {
     it('should support returning a basic prefix', async () => {
       const expectedPrefix = chance.string();
       const expectedMessage = {} as ChocoMessage;
@@ -51,9 +51,23 @@ describe('class(ChocoCommandPlugin)', () => {
         prefix: expectedPrefix,
       });
 
-      const prefix = await plugin.prefix(expectedMessage);
+      const prefix = await plugin.prefixes(expectedMessage);
 
-      expect(prefix).toEqual(expectedPrefix);
+      expect(prefix).toEqual([expectedPrefix]);
+    });
+
+    it('should support returning multiple prefixes', async () => {
+      const expectedPrefix = chance.string();
+      const otherExpectedPrefix = chance.string();
+      const expectedMessage = {} as ChocoMessage;
+
+      const plugin = new ChocoCommandPlugin({
+        prefix: [expectedPrefix, otherExpectedPrefix],
+      });
+
+      const prefix = await plugin.prefixes(expectedMessage);
+
+      expect(prefix).toEqual([expectedPrefix, otherExpectedPrefix]);
     });
 
     it('should support returning a dynamic prefix', async () => {
@@ -69,10 +83,30 @@ describe('class(ChocoCommandPlugin)', () => {
         },
       });
 
-      const prefix = await plugin.prefix(expectedMessage);
+      const prefix = await plugin.prefixes(expectedMessage);
 
       expect(prefix).toBeTruthy();
-      expect(prefix).toEqual(expectedPrefix);
+      expect(prefix).toEqual([expectedPrefix]);
+    });
+
+    it('should support returning multiple dynamic prefixes', async () => {
+      let expectedPrefix, otherExpectedPrefix;
+      const expectedMessage = {} as ChocoMessage;
+
+      const plugin = new ChocoCommandPlugin({
+        prefix: (message) => {
+          expect(message).toEqual(expectedMessage);
+
+          expectedPrefix = chance.string();
+          otherExpectedPrefix = chance.string();
+          return [expectedPrefix, otherExpectedPrefix];
+        },
+      });
+
+      const prefix = await plugin.prefixes(expectedMessage);
+
+      expect(prefix).toBeTruthy();
+      expect(prefix).toEqual([expectedPrefix, otherExpectedPrefix]);
     });
   });
 

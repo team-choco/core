@@ -50,19 +50,24 @@ export class ChocoCommandPlugin implements ChocoPlugin {
     return command;
   }
 
-  public async prefix(message: ChocoMessage): Promise<string> {
+  public async prefixes(message: ChocoMessage): Promise<string[]> {
+    let prefixes: string|string[];
     if (typeof this.options.prefix === 'function') {
-      return await this.options.prefix(message);
+      prefixes = await this.options.prefix(message);
+    } else {
+      prefixes = this.options.prefix;
     }
 
-    return this.options.prefix;
+    return Array.isArray(prefixes) ? prefixes : [prefixes];
   }
 
   private async onMessage(message: ChocoMessage): Promise<void> {
-    const prefix = await this.prefix(message);
+    const prefixes = await this.prefixes(message);
+
+    const prefix = prefixes.find((prefix) => message.content.startsWith(prefix));
 
     // Bail early if our prefix doesn't match.
-    if (!message.content.startsWith(prefix)) return;
+    if (!prefix) return;
 
     const content = message.content.replace(new RegExp(`^${prefix}`), '');
 
@@ -91,11 +96,13 @@ export class ChocoCommandPlugin implements ChocoPlugin {
   }
 }
 
-export type ChocoPrefixGetter = (message: ChocoMessage) => (string|Promise<string>);
+export type ChocoPrefix = (string|string[]);
+
+export type ChocoPrefixGetter = (message: ChocoMessage) => (ChocoPrefix|Promise<ChocoPrefix>);
 
 export interface ChocoCommandPluginOptions {
   /**
    * The command prefix.
    */
-  prefix: string | ChocoPrefixGetter;
+  prefix: ChocoPrefix | ChocoPrefixGetter;
 }
