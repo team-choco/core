@@ -1,10 +1,11 @@
 import { toChocoPattern } from '../pattern';
 import { ChocoArgs, toChocoArgs } from '../args';
 
-import { ChocoCommandListenerDetails, ChocoRawCommandOptions, ChocoCommandOptions } from './types';
+import { ChocoCommandListenerDetails, ChocoRawCommandOptions, ChocoCommandOptions, Help } from './types';
 
 export class ChocoCommand {
   public options: ChocoCommandOptions;
+  public helpConfig?: Help;
 
   constructor(options: ChocoRawCommandOptions) {
     this.options = {
@@ -25,5 +26,11 @@ export class ChocoCommand {
 
   async exec(options: ChocoCommandListenerDetails): Promise<void> {
     await this.options.listener(options);
+  }
+
+  public help(options?: Help){
+    if(options !== undefined) {
+      this.helpConfig = options
+    }
   }
 }
