@@ -28,7 +28,7 @@ export class ChocoCommand {
     await this.options.listener(options);
   }
 
-  help(options?: Help){
+  help(options?: Help): void{
     if(options !== undefined) {
       this.helpConfig = options
     }

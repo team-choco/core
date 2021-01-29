@@ -24,7 +24,7 @@ bot.command('ping', async ({ message }) => {
 }).help({
   name: "Ping",
   description: "Message the bot ping and the bot replies with pong!",
-});;
+});
 
 process.on('SIGINT', () => {
   bot.destroy();
