@@ -14,11 +14,17 @@ const bot = new ChocoBotCore({
 
 bot.command('pong', async ({ message }) => {
   await message.reply('ping!');
+}).help({
+  name: "Pong",
+  description: "Message the bot pong and the bot replies with ping!",
 });
 
 bot.command('ping', async ({ message }) => {
   await message.reply('pong!');
-});
+}).help({
+  name: "Ping",
+  description: "Message the bot ping and the bot replies with pong!",
+});;
 
 process.on('SIGINT', () => {
   bot.destroy();
