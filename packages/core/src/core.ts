@@ -30,13 +30,12 @@ export class ChocoBotCore extends EventEmitter {
 
   /**
    * Returns a message that matches the given criteria.
-   * 
+   *
    * @param channelID - the id of the server the channel is in.
-   * @param channelID - the id of the channel the message is in.
    * @param messageID - the id of the message to edit.
    */
-  public message(serverID: string, channelID: string, messageID: string): Promise<(ChocoMessage|null)> {
-    return this.platform.message(serverID, channelID, messageID);
+  public message(channelID: string, messageID: string): Promise<(ChocoMessage|null)> {
+    return this.platform.message(channelID, messageID);
   }
 
   isServerMessage(message: ChocoMessage): message is ChocoMessageServer {

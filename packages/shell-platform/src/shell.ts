@@ -54,7 +54,7 @@ export class ChocoShellPlatform extends ChocoPlatform {
     this.emit('ready');
   }
 
-  async message(serverID: string, channelID: string, messageID: string): Promise<ChocoMessageServer | null> {
+  async message(channelID: string, messageID: string): Promise<ChocoMessageServer | null> {
     return this.messages.find((message) => (
       message.id === messageID
     )) || null;

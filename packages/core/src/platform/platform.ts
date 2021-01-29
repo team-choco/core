@@ -51,11 +51,10 @@ export abstract class ChocoPlatform extends EventEmitter {
   /**
    * Returns a message that matches the given criteria.
    *
-   * @param serverID - the id of the server the channel is in.
    * @param channelID - the id of the channel the message is in.
    * @param messageID - the id of the message to edit.
    */
-  public abstract message(serverID: string, channelID: string, messageID: string): Promise<(ChocoMessage|null)>;
+  public abstract message(channelID: string, messageID: string): Promise<(ChocoMessage|null)>;
 
   /**
    * Normalizes the message options.

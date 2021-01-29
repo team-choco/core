@@ -15,7 +15,7 @@ class MockPlatform extends ChocoPlatform {
   public destroy = sinon.stub().resolves();
   public on = sinon.stub();
 
-  public message(serverID: string, channelID: string, messageID: string): Promise<ChocoMessage | null> {
+  public message(channelID: string, messageID: string): Promise<ChocoMessage | null> {
     throw new Error('Method not implemented.');
   }
 

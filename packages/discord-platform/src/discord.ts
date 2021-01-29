@@ -46,15 +46,11 @@ export class ChocoDiscordPlatform extends ChocoPlatform {
     };
   }
 
-  async message(serverID: string, channelID: string, messageID: string): Promise<ChocoMessage | null> {
+  async message(channelID: string, messageID: string): Promise<ChocoMessage | null> {
     const channel = await this.client.channels.fetch(channelID) as TextChannel;
 
     if (channel === null) {
       throw new Error(`Channel doesn't exist!`);
-    }
-
-    if (serverID !== '@me' && channel.guild.id !== serverID) {
-      throw new Error(`Channel doesn't belong to the given server!`);
     }
 
     const message = await channel.messages.fetch(messageID);
