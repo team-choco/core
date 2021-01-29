@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.27](https://github.com/team-choco/core/compare/v0.1.26...v0.1.27) (2021-01-29)
+
+
+### Bug Fixes
+
+* server id shouldn't be required for looking up messages ([a6f92e7](https://github.com/team-choco/core/commit/a6f92e724d836b06ee8e5bc8408f1dde563cfef3))
+
+
+
+
+
 ## [0.1.26](https://github.com/team-choco/core/compare/v0.1.25...v0.1.26) (2021-01-17)
 
 
