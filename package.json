@@ -6,7 +6,7 @@
     "start": "lerna run start --stream",
     "build": "lerna run build --ignore @team-choco/examples-*",
     "build:prod": "lerna run build --ignore @team-choco/examples-* --ignore @team-choco/*-helpers",
-    "build:watch": "lerna run build:watch --include-dependencies --ignore @team-choco/examples-*",
+    "build:watch": "lerna run build:watch --parallel --include-dependencies --ignore @team-choco/examples-*",
     "version": "lerna version --conventional-commits --no-private --create-release github",
     "release": "npm run build:prod && lerna publish from-git --no-verify-access --no-private",
     "lint": "eslint . --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint",
