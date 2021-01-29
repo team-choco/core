@@ -1,6 +1,6 @@
 import { ChocoPlugin, ChocoBotCore, ChocoMessage } from '@team-choco/core';
 
-import { ChocoCommand, ChocoCommandListener, ChocoCommandListenerDetails, ChocoCommandListenerDetailsError } from './command';
+import { ChocoCommand, ChocoCommandListener, ChocoCommandListenerDetails, ChocoCommandListenerDetailsError, Help } from './command';
 import { ChocoArgs } from './args';
 
 declare module '@team-choco/core' {
@@ -92,6 +92,15 @@ export class ChocoCommandPlugin implements ChocoPlugin {
         ...details,
         error,
       });
+    }
+  }
+
+  help(commandHelp: Help): void {
+    console.log(commandHelp)
+    if(commandHelp){
+      this.bot.commands.find((command) => {
+        return command.help(commandHelp)
+      })
     }
   }
 }
