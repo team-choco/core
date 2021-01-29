@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/team-choco/core/compare/v0.1.28...v0.2.0) (2021-01-29)
+
+
+### Features
+
+* added support for help command ([6607efa](https://github.com/team-choco/core/commit/6607efafd4c2d85e89fa595dbbc547111c14efc2))
+
+
+
+
+
 ## [0.1.28](https://github.com/team-choco/core/compare/v0.1.27...v0.1.28) (2021-01-29)
 
 **Note:** Version bump only for package @team-choco/discord-platform

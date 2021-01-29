@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/team-choco/core/compare/v0.1.28...v0.2.0) (2021-01-29)
+
+
+### Bug Fixes
+
+* missing return type and unnecessary semicolon ([41cb154](https://github.com/team-choco/core/commit/41cb1547acceb29edc9820f5c95d6ee3dd01634e))
+
+
+### Features
+
+* added examples of help ([920009e](https://github.com/team-choco/core/commit/920009e41bda1290a86d81c48cd91bbead0cd5af))
+* added support for help command ([6607efa](https://github.com/team-choco/core/commit/6607efafd4c2d85e89fa595dbbc547111c14efc2))
+* added support for help command ([9dbcffb](https://github.com/team-choco/core/commit/9dbcffbaf540bd625c53159678fced1d8936e206))
+
+
+
+
+
 ## [0.1.28](https://github.com/team-choco/core/compare/v0.1.27...v0.1.28) (2021-01-29)
 
 **Note:** Version bump only for package @team-choco/command-plugin
