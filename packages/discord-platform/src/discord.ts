@@ -95,7 +95,7 @@ export class ChocoDiscordPlatform extends ChocoPlatform {
     const channel = await this.client.channels.fetch(channelID);
 
     if (!this.isTextBasedChannel(channel)) {
-      throw new Error(`Channel must be either a "text" or "dm" channel. (${channelID})`);
+      throw new Error(`Channel must be either a "text", "dm", or "news" channel. (${channelID})`);
     }
 
     const content: MessageOptions = {
@@ -131,7 +131,7 @@ export class ChocoDiscordPlatform extends ChocoPlatform {
     const channel = await this.client.channels.fetch(channelID);
 
     if (!this.isTextBasedChannel(channel)) {
-      throw new Error(`Channel must be either a "text" or "dm" channel. (${channelID})`);
+      throw new Error(`Channel must be either a "text", "dm", or "news" channel. (${channelID})`);
     }
 
     const message = await channel.messages.fetch(messageID);
@@ -166,7 +166,7 @@ export class ChocoDiscordPlatform extends ChocoPlatform {
     const channel = await this.client.channels.fetch(channelID);
 
     if (!this.isTextBasedChannel(channel)) {
-      throw new Error(`Channel must be either a "text" or "dm" channel. (${channelID})`);
+      throw new Error(`Channel must be either a "text", "dm", or "news" channel. (${channelID})`);
     }
 
     const message = await channel.messages.fetch(messageID);
@@ -199,7 +199,7 @@ export class ChocoDiscordPlatform extends ChocoPlatform {
   }
 
   private isTextBasedChannel(channel: Channel): channel is (DMChannel|TextChannel) {
-    return ['dm', 'text'].includes(channel.type);
+    return ['dm', 'text', 'news'].includes(channel.type);
   }
 
   private normalizeEmbed(embed?: ChocoEmbed): (undefined|MessageEmbedOptions) {
